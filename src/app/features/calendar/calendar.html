@@ -1,0 +1,33 @@
+<h1 class="page-title">{{ 'nav.calendar' | t }}</h1>
+
+@if (groups().length) {
+  <ol class="timeline fade-in">
+    @for (group of groups(); track group.date) {
+      <li class="timeline__day" [class.timeline__day--overdue]="group.overdue">
+        <header class="timeline__header">
+          <time [attr.datetime]="group.date">{{
+            group.date | date: 'EEEE, MMM d' : undefined : i18n.locale()
+          }}</time>
+          <span class="timeline__label">{{ group.label }}</span>
+        </header>
+        <ul class="timeline__tasks">
+          @for (task of group.tasks; track task.id) {
+            <li>
+              <button
+                type="button"
+                class="timeline__task app-card"
+                (click)="openDialog(task, true)"
+              >
+                <app-priority-badge [priority]="task.priority" />
+                <span class="timeline__title" dir="auto">{{ task.title }}</span>
+                <span class="timeline__assignee">{{ task.assignee.name }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+      </li>
+    }
+  </ol>
+} @else {
+  <app-empty-state icon="check" titleKey="calendar.emptyTitle" messageKey="calendar.emptyMessage" />
+}

@@ -1,0 +1,44 @@
+<h1 class="page-title">{{ 'nav.team' | t }}</h1>
+
+<div class="row g-3">
+  @if (userApi.isLoading() && !members().length) {
+    @for (item of [1, 2, 3, 4]; track item) {
+      <div class="col-12 col-sm-6 col-xl-3">
+        <p-skeleton height="190px" borderRadius="8px" />
+      </div>
+    }
+  } @else {
+    @for (member of members(); track member.id) {
+      <div class="col-12 col-sm-6 col-xl-3 slide-up">
+        <article class="member app-card" [attr.aria-label]="member.name">
+          <app-user-avatar [name]="member.name" [size]="56" />
+          <h2 class="member__name">{{ member.name }}</h2>
+          <a class="member__email" [href]="'mailto:' + member.email">{{ member.email }}</a>
+
+          <dl class="member__stats">
+            <div>
+              <dt>{{ 'team.open' | t }}</dt>
+              <dd>{{ member.open }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'team.done' | t }}</dt>
+              <dd class="text-success">{{ member.done }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'team.overdue' | t }}</dt>
+              <dd class="text-danger">{{ member.overdue }}</dd>
+            </div>
+          </dl>
+
+          <p-button
+            [label]="'actions.viewTasks' | t"
+            size="small"
+            [outlined]="true"
+            styleClass="w-100"
+            (onClick)="viewTasks(member)"
+          />
+        </article>
+      </div>
+    }
+  }
+</div>

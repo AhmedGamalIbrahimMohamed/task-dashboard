@@ -1,0 +1,48 @@
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  transition: box-shadow 200ms;
+
+  &:hover {
+    box-shadow: var(--app-shadow-hover);
+  }
+}
+
+.member__name {
+  margin: 0.75rem 0 0.125rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.member__email {
+  font-size: 0.75rem;
+  color: var(--app-text-muted);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--app-primary);
+  }
+}
+
+.member__stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 1.25rem 0;
+
+  dt {
+    font-size: 0.6875rem;
+    font-weight: 400;
+    color: var(--app-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
