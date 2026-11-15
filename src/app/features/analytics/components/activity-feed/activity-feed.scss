@@ -1,0 +1,46 @@
+.feed {
+  height: 100%;
+  padding: 1.25rem;
+}
+
+.feed__title {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.feed__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feed__item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--app-border);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.feed__content {
+  min-width: 0;
+}
+
+.feed__text {
+  margin: 0 0 0.125rem;
+  font-size: 0.8125rem;
+}
+
+.feed__task {
+  color: var(--app-primary);
+}
+
+.feed__time,
+.feed__empty {
+  font-size: 0.75rem;
+  color: var(--app-text-muted);
+}

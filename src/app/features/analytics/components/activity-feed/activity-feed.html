@@ -1,0 +1,26 @@
+<section class="feed app-card" aria-labelledby="activity-title">
+  <h2 id="activity-title" class="feed__title">{{ 'activity.title' | t }}</h2>
+
+  <ol class="feed__list" aria-live="polite">
+    @for (activity of activities(); track activity.id) {
+      <li class="feed__item" animate.enter="slide-up">
+        <app-user-avatar [name]="activity.userName" [size]="32" />
+        <div class="feed__content">
+          <p class="feed__text">
+            <app-icon [name]="icons[activity.type]" [size]="13" />
+            <strong
+              ><bdi>{{ activity.userName }}</bdi></strong
+            >
+            {{ verbs[activity.type] | t }}
+            <bdi class="feed__task">"{{ activity.taskTitle }}"</bdi>
+          </p>
+          <time class="feed__time" [attr.datetime]="activity.date">
+            {{ activity.date | date: 'MMM d, h:mm a' : undefined : i18n.locale() }}
+          </time>
+        </div>
+      </li>
+    } @empty {
+      <li class="feed__empty">{{ 'activity.empty' | t }}</li>
+    }
+  </ol>
+</section>

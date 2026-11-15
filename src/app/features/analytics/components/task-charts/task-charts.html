@@ -1,0 +1,30 @@
+<div class="row g-3">
+  <div class="col-12 col-md-6">
+    <section class="chart-card app-card" aria-labelledby="priority-chart-title">
+      <h2 id="priority-chart-title" class="chart-card__title">{{ 'analytics.byPriority' | t }}</h2>
+      <div class="chart-card__body">
+        <p-chart
+          type="doughnut"
+          [data]="priorityData()"
+          [options]="doughnutOptions"
+          height="260px"
+          [ariaLabel]="'analytics.byPriorityChart' | t"
+        />
+      </div>
+    </section>
+  </div>
+  <div class="col-12 col-md-6">
+    <section class="chart-card app-card" aria-labelledby="status-chart-title">
+      <h2 id="status-chart-title" class="chart-card__title">{{ 'analytics.byStatus' | t }}</h2>
+      <div class="chart-card__body">
+        <p-chart
+          type="bar"
+          [data]="statusData()"
+          [options]="barOptions"
+          height="260px"
+          [ariaLabel]="'analytics.byStatusChart' | t"
+        />
+      </div>
+    </section>
+  </div>
+</div>
