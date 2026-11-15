@@ -1,0 +1,49 @@
+<header class="header">
+  <div class="header__brand">
+    <button
+      type="button"
+      class="icon-btn d-lg-none"
+      [attr.aria-label]="'header.openNavigation' | t"
+      (click)="menuToggle.emit()"
+    >
+      <i class="pi pi-bars" aria-hidden="true"></i>
+    </button>
+    <span class="header__logo"><app-icon name="clipboard" [size]="9" /></span>
+    <span class="header__title">{{ 'app.name' | t }}</span>
+  </div>
+
+  <label class="header__search" for="global-search">
+    <span class="visually-hidden">{{ 'header.searchLabel' | t }}</span>
+    <app-icon name="search" [size]="12" />
+    <input
+      id="global-search"
+      type="search"
+      autocomplete="off"
+      [placeholder]="'header.searchPlaceholder' | t"
+      [value]="search()"
+      (input)="onSearch($event)"
+    />
+  </label>
+
+  <div class="header__actions">
+    <button
+      type="button"
+      class="header__language"
+      [attr.lang]="i18n.language() === 'en' ? 'ar' : 'en'"
+      [attr.aria-label]="'header.switchLanguageLabel' | t"
+      (click)="i18n.toggleLanguage()"
+    >
+      {{ 'header.switchLanguage' | t }}
+    </button>
+    <button type="button" class="icon-btn" [attr.aria-label]="'header.notifications' | t">
+      <app-icon name="bell" [size]="20" />
+    </button>
+    <span
+      class="header__avatar"
+      role="img"
+      [attr.aria-label]="'header.signedInAs' | t: { name: userInitials() }"
+    >
+      {{ userInitials() }}
+    </span>
+  </div>
+</header>

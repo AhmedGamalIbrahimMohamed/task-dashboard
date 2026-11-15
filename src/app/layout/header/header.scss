@@ -1,0 +1,153 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header {
+  height: var(--app-header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 24px;
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow);
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header__logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--app-primary);
+  display: grid;
+  place-items: center;
+}
+
+.header__title {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--app-primary);
+  white-space: nowrap;
+}
+
+.header__search {
+  flex: 0 1 400px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 33px;
+  padding: 9px 17px;
+  border: 1px solid var(--app-border);
+  border-radius: 4px;
+  background: var(--app-surface);
+  transition: border-color 150ms;
+
+  &:focus-within {
+    border-color: var(--app-primary);
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    font-size: 12.4px;
+    color: var(--app-text);
+    background: transparent;
+
+    &::placeholder {
+      color: var(--app-text-muted);
+    }
+  }
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__language {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--app-border);
+  border-radius: 4px;
+  background: var(--app-surface);
+  color: var(--app-text);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 150ms;
+
+  &:hover {
+    background: var(--app-hover);
+  }
+}
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--app-primary);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 20px;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  transition: background-color 150ms;
+
+  &:hover {
+    background: var(--app-hover);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .header {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .header,
+  .header__actions {
+    gap: 8px;
+  }
+
+  .header__title {
+    display: none;
+  }
+
+  .header__search {
+    padding: 9px 10px;
+  }
+
+  .header__language {
+    padding: 0 8px;
+  }
+
+  .icon-btn,
+  .header__avatar {
+    width: 36px;
+    height: 36px;
+  }
+}

@@ -1,0 +1,29 @@
+<a class="visually-hidden-focusable" href="#main-content">{{ 'app.skipToContent' | t }}</a>
+
+<app-header
+  [search]="store.filters().search"
+  (searchChange)="onSearch($event)"
+  (menuToggle)="menuOpen.set(true)"
+/>
+
+<div class="shell">
+  <aside class="shell__sidebar d-none d-lg-block">
+    <app-sidebar (newTask)="onNewTask()" />
+  </aside>
+
+  <main id="main-content" class="shell__content" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>
+
+<p-drawer
+  [visible]="menuOpen()"
+  (visibleChange)="menuOpen.set($event)"
+  [header]="'app.name' | t"
+  [position]="isRtl() ? 'right' : 'left'"
+>
+  <app-sidebar (newTask)="onNewTask()" (navigate)="menuOpen.set(false)" />
+</p-drawer>
+
+<p-toast [position]="isRtl() ? 'top-left' : 'top-right'" />
+<p-confirmdialog [style]="{ width: 'min(420px, 92vw)' }" />

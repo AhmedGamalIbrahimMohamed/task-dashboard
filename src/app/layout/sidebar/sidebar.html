@@ -1,0 +1,22 @@
+<nav class="sidebar" [attr.aria-label]="'nav.label' | t">
+  <ul class="sidebar__list">
+    @for (item of items; track item.path) {
+      <li>
+        <a
+          class="nav-item"
+          [routerLink]="item.path"
+          routerLinkActive="nav-item--active"
+          ariaCurrentWhenActive="page"
+          (click)="navigate.emit()"
+        >
+          <app-icon [name]="item.icon" [size]="item.iconSize" />
+          {{ item.label | t }}
+        </a>
+      </li>
+    }
+  </ul>
+
+  <button type="button" class="sidebar__cta" (click)="newTask.emit()">
+    {{ 'actions.newTask' | t }}
+  </button>
+</nav>
