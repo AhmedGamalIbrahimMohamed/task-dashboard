@@ -1,0 +1,43 @@
+<div class="row g-4" cdkDropListGroup>
+  @for (column of columns(); track column.status) {
+    <section
+      class="col-12"
+      [class.col-lg-4]="columns().length === 3"
+      [class.col-lg-6]="columns().length === 2"
+      [attr.aria-label]="'board.column' | t: { status: (column.key | t) }"
+    >
+      <div class="board-column">
+        <header class="board-column__header">
+          <h2 class="board-column__title">{{ column.key | t }}</h2>
+          <span
+            class="board-column__count"
+            [attr.aria-label]="'board.count' | t: { count: column.tasks.length }"
+          >
+            {{ column.tasks.length }}
+          </span>
+        </header>
+
+        <div
+          class="board-column__list"
+          cdkDropList
+          [cdkDropListData]="column.status"
+          (cdkDropListDropped)="onDrop($event)"
+        >
+          @for (task of column.tasks; track task.id) {
+            <app-task-card
+              cdkDrag
+              [cdkDragData]="task"
+              [task]="task"
+              animate.enter="slide-up"
+              (view)="view.emit($event)"
+              (edit)="edit.emit($event)"
+              (remove)="remove.emit($event)"
+            />
+          } @empty {
+            <p class="board-column__empty">{{ 'board.empty' | t }}</p>
+          }
+        </div>
+      </div>
+    </section>
+  }
+</div>

@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+app-filter-bar {
+  display: block;
+}
+
+.dashboard__section {
+  margin-bottom: 32px;
+}
+
+@media (max-width: 991.98px) {
+  .dashboard__section {
+    margin-bottom: 24px;
+  }
+}

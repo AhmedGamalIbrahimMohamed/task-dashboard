@@ -1,0 +1,32 @@
+<section class="filter-bar" [attr.aria-label]="'filters.label' | t">
+  <div class="filter-bar__tabs" role="tablist" [attr.aria-label]="'filters.byStatus' | t">
+    @for (tab of tabs; track tab.value) {
+      <button
+        type="button"
+        role="tab"
+        class="filter-bar__tab"
+        [class.filter-bar__tab--active]="status() === tab.value"
+        [attr.aria-selected]="status() === tab.value"
+        (click)="statusChange.emit(tab.value)"
+      >
+        {{ tab.key | t }}
+      </button>
+    }
+  </div>
+
+  <div class="filter-bar__actions">
+    <button
+      type="button"
+      class="filter-bar__priority"
+      aria-haspopup="menu"
+      [attr.aria-label]="'filters.byPriority' | t"
+      (click)="menu.toggle($event)"
+    >
+      {{ priorityLabel() }} ▾
+    </button>
+    <p-menu #menu [model]="priorityItems()" [popup]="true" appendTo="body" />
+    <button type="button" class="filter-bar__new" (click)="newTask.emit()">
+      {{ 'actions.newTask' | t }}
+    </button>
+  </div>
+</section>

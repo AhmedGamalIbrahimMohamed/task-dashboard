@@ -1,0 +1,62 @@
+<h1 class="visually-hidden">{{ 'nav.dashboard' | t }}</h1>
+
+<section class="row g-4 dashboard__section" [attr.aria-label]="'stats.label' | t">
+  @if (stats().length) {
+    @for (stat of stats(); track stat.id) {
+      <div class="col-12 col-sm-6 col-xl-3 slide-up">
+        <app-stat-card [stat]="stat" />
+      </div>
+    }
+  } @else {
+    @for (item of skeletonStats; track item) {
+      <div class="col-12 col-sm-6 col-xl-3">
+        <p-skeleton height="110px" borderRadius="8px" />
+      </div>
+    }
+  }
+</section>
+
+<app-filter-bar
+  class="dashboard__section"
+  [status]="store.filters().status"
+  [priority]="store.filters().priority"
+  (statusChange)="store.updateFilters({ status: $event })"
+  (priorityChange)="store.updateFilters({ priority: $event })"
+  (newTask)="openDialog()"
+/>
+
+@if (store.error()) {
+  <app-empty-state
+    icon="warning"
+    titleKey="dashboard.loadError"
+    messageKey="dashboard.loadErrorHint"
+  >
+    <p-button
+      [label]="'actions.retry' | t"
+      icon="pi pi-refresh"
+      size="small"
+      (onClick)="store.reload()"
+    />
+  </app-empty-state>
+} @else if (store.isLoading() && !store.tasks().length) {
+  <div class="row g-4" aria-busy="true" [attr.aria-label]="'dashboard.loading' | t">
+    @for (column of skeletonColumns; track column) {
+      <div class="col-12 col-lg-4">
+        <div class="app-card p-3 d-flex flex-column gap-3">
+          <p-skeleton width="40%" height="1rem" />
+          <p-skeleton height="140px" borderRadius="8px" />
+          <p-skeleton height="140px" borderRadius="8px" />
+        </div>
+      </div>
+    }
+  </div>
+} @else {
+  <app-task-board
+    [tasks]="store.filteredTasks()"
+    [statuses]="visibleStatuses()"
+    (move)="store.move($event)"
+    (view)="openDialog($event, true)"
+    (edit)="openDialog($event)"
+    (remove)="actions.confirmDelete($event)"
+  />
+}

@@ -1,0 +1,69 @@
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px 16px 8px;
+  background: var(--app-surface);
+  border-radius: 8px;
+  box-shadow: var(--app-shadow);
+}
+
+.filter-bar__tabs,
+.filter-bar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-bar__tab,
+.filter-bar__priority,
+.filter-bar__new {
+  height: 32px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 4px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 150ms;
+}
+
+.filter-bar__tab {
+  background: transparent;
+  color: #000;
+  font-size: 13.3px;
+
+  &:hover {
+    background: var(--app-hover);
+  }
+}
+
+.filter-bar__tab--active,
+.filter-bar__tab--active:hover {
+  background: var(--app-primary);
+  color: #fff;
+}
+
+.filter-bar__priority {
+  min-width: 88px;
+  height: 33px;
+  padding: 8px 17px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #000;
+  font-size: 14px;
+}
+
+.filter-bar__new {
+  padding: 8px 22.6px;
+  background: var(--app-primary);
+  color: #fff;
+  font-size: 12.9px;
+  font-weight: 500;
+
+  &:hover {
+    background: var(--app-primary-dark);
+  }
+}
