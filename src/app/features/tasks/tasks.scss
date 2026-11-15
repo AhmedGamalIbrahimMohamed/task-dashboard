@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.task-description {
+  max-width: 360px;
+}
+
+.row-overdue td {
+  background: var(--app-danger-soft);
+}
+
+:host ::ng-deep .p-datatable {
+  border-radius: var(--app-radius);
+  overflow: hidden;
+  font-size: 0.8125rem;
+}
+
+:host ::ng-deep .p-datatable td:not(:first-child) {
+  white-space: nowrap;
+}
+
+.cell-end {
+  text-align: end;
+}

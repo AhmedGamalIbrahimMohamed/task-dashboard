@@ -1,0 +1,152 @@
+<form class="task-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <div class="task-form__field">
+    <label for="task-title">
+      {{ 'form.title' | t }}
+      <span class="task-form__required" aria-hidden="true">*</span>
+      <span class="visually-hidden">({{ 'form.required' | t }})</span>
+    </label>
+    <input
+      pInputText
+      id="task-title"
+      formControlName="title"
+      aria-required="true"
+      [placeholder]="'form.titlePlaceholder' | t"
+      [attr.aria-invalid]="!!errorFor(form.controls.title)"
+      aria-describedby="task-title-error"
+    />
+    <small id="task-title-error" class="task-form__error">{{
+      errorFor(form.controls.title)
+    }}</small>
+  </div>
+
+  <div class="task-form__field">
+    <label for="task-description">{{ 'form.description' | t }}</label>
+    <textarea
+      pTextarea
+      id="task-description"
+      rows="3"
+      formControlName="description"
+      [placeholder]="'form.descriptionPlaceholder' | t"
+      aria-describedby="task-description-error"
+    ></textarea>
+    <small id="task-description-error" class="task-form__error">{{
+      errorFor(form.controls.description)
+    }}</small>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-12 col-sm-6 task-form__field">
+      <label for="task-status">{{ 'form.status' | t }}</label>
+      <p-select
+        inputId="task-status"
+        formControlName="status"
+        [options]="statuses()"
+        optionLabel="label"
+        optionValue="value"
+        appendTo="body"
+        styleClass="w-100"
+      />
+    </div>
+    <div class="col-12 col-sm-6 task-form__field">
+      <label for="task-priority">{{ 'form.priority' | t }}</label>
+      <p-select
+        inputId="task-priority"
+        formControlName="priority"
+        [options]="priorities()"
+        optionLabel="label"
+        optionValue="value"
+        appendTo="body"
+        styleClass="w-100"
+      />
+    </div>
+    <div class="col-12 col-sm-6 task-form__field">
+      <label for="task-due">
+        {{ 'form.dueDate' | t }}
+        <span class="task-form__required" aria-hidden="true">*</span>
+        <span class="visually-hidden">({{ 'form.required' | t }})</span>
+      </label>
+      <p-datepicker
+        inputId="task-due"
+        formControlName="dueDate"
+        dateFormat="yy-mm-dd"
+        [placeholder]="'form.dueDatePlaceholder' | t"
+        [showIcon]="true"
+        appendTo="body"
+        styleClass="w-100"
+      />
+      <small class="task-form__error">{{ errorFor(form.controls.dueDate) }}</small>
+    </div>
+    <div class="col-12 col-sm-6 task-form__field">
+      <label for="task-assignee">
+        {{ 'form.assignee' | t }}
+        <span class="task-form__required" aria-hidden="true">*</span>
+        <span class="visually-hidden">({{ 'form.required' | t }})</span>
+      </label>
+      <p-select
+        inputId="task-assignee"
+        formControlName="assigneeId"
+        [options]="userApi.users()"
+        [loading]="userApi.isLoading()"
+        optionLabel="name"
+        optionValue="id"
+        [placeholder]="'form.assigneePlaceholder' | t"
+        appendTo="body"
+        styleClass="w-100"
+      />
+      <small class="task-form__error">{{ errorFor(form.controls.assigneeId) }}</small>
+    </div>
+  </div>
+
+  <div class="task-form__field mt-3">
+    <label for="task-tag">{{ 'form.tags' | t: { count: tags.length, max: maxTags } }}</label>
+    @if (!viewOnly) {
+      <div class="d-flex gap-2">
+        <input
+          pInputText
+          id="task-tag"
+          class="flex-grow-1"
+          [formControl]="tagInput"
+          [placeholder]="'form.tagPlaceholder' | t"
+          [readonly]="tags.length >= maxTags"
+          (keydown.enter)="addTag($event)"
+        />
+        <p-button
+          type="button"
+          [label]="'actions.add' | t"
+          severity="secondary"
+          [outlined]="true"
+          [disabled]="tags.length >= maxTags"
+          (onClick)="addTag()"
+        />
+      </div>
+    }
+    @if (tags.length) {
+      <div class="task-form__tags" aria-live="polite">
+        @for (tag of tags.controls; track $index) {
+          <p-chip [label]="tag.value" [removable]="!viewOnly" (onRemove)="removeTag($index)" />
+        }
+      </div>
+    }
+    <small class="task-form__error">{{ errorFor(tags) }}</small>
+  </div>
+
+  <div class="task-form__footer">
+    @if (viewOnly) {
+      <p-button type="button" [label]="'actions.close' | t" (onClick)="close()" />
+    } @else {
+      <p-button
+        type="button"
+        [label]="'actions.cancel' | t"
+        severity="secondary"
+        [text]="true"
+        (onClick)="close()"
+      />
+      <p-button
+        type="submit"
+        [label]="(task ? 'form.save' : 'form.create') | t"
+        [loading]="saving()"
+        [disabled]="!isValid() || saving()"
+      />
+    }
+  </div>
+</form>

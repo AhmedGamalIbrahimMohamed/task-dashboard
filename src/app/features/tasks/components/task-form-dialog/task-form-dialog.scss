@@ -1,0 +1,46 @@
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+
+  label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+}
+
+.task-form__error {
+  min-height: 1rem;
+  font-size: 0.75rem;
+  color: var(--app-danger);
+}
+
+.task-form__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.task-form__required {
+  color: var(--app-danger);
+  font-weight: 600;
+}
+
+.task-form__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 1rem;
+}
