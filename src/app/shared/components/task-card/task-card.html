@@ -1,0 +1,35 @@
+<article class="task-card" [attr.aria-label]="task().title">
+  <header class="task-card__top">
+    <app-priority-badge [priority]="task().priority" />
+    <button
+      type="button"
+      class="task-card__menu-btn"
+      [attr.aria-label]="'actions.taskMenu' | t: { title: task().title }"
+      aria-haspopup="menu"
+      (click)="menu.toggle($event)"
+    >
+      ⋮
+    </button>
+  </header>
+  <p-menu #menu [model]="menuItems()" [popup]="true" appendTo="body" />
+
+  <h3 class="task-card__title" dir="auto">{{ task().title }}</h3>
+  @if (task().description) {
+    <p class="task-card__description" dir="auto">{{ task().description }}</p>
+  }
+
+  <div class="task-card__meta">
+    <p class="task-card__due">
+      <app-icon [name]="metaIcon()" [size]="11" />
+      {{ dueText() }}
+    </p>
+    @if (task().tags.length) {
+      <p class="task-card__tags" dir="auto">{{ task().tags.join(', ') }}</p>
+    }
+  </div>
+
+  <footer class="task-card__footer">
+    <app-user-avatar [name]="task().assignee.name" [size]="24" />
+    <bdi>&#64;{{ assigneeName() }}</bdi>
+  </footer>
+</article>

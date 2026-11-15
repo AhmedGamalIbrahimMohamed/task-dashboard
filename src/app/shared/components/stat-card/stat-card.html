@@ -1,0 +1,13 @@
+<article class="stat-card" [attr.aria-label]="stat().title + ': ' + stat().value">
+  <h2 class="stat-card__title">
+    <app-icon [name]="icon().name" [size]="icon().size" />
+    {{ stat().title }}
+  </h2>
+  <p class="stat-card__value">{{ stat().value }}</p>
+  <p class="stat-card__change" [class]="'stat-card__change--' + stat().changeType">
+    @if (stat().change !== '0') {
+      <bdi>{{ stat().change }}</bdi>
+    }
+    {{ stat().changeLabel }}
+  </p>
+</article>

@@ -1,0 +1,24 @@
+:host {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10.8px;
+  font-weight: 700;
+  line-height: 17.6px;
+  text-transform: uppercase;
+}
+
+:host(.badge-high) {
+  color: var(--app-danger);
+  background: var(--app-danger-soft);
+}
+
+:host(.badge-medium) {
+  color: var(--app-warning);
+  background: var(--app-warning-soft);
+}
+
+:host(.badge-low) {
+  color: var(--app-success);
+  background: var(--app-warning-soft);
+}

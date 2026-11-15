@@ -1,0 +1,122 @@
+:host {
+  --card-accent: var(--app-primary);
+  --card-glow: 25%;
+  display: block;
+}
+
+:host(.status-in_progress) {
+  --card-accent: var(--app-progress);
+}
+
+:host(.status-done) {
+  --card-accent: var(--app-success);
+}
+
+:host(.overdue) {
+  --card-accent: var(--app-danger);
+  --card-glow: 30%;
+}
+
+.task-card {
+  padding: 17px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  cursor: grab;
+  transition:
+    border-color 200ms,
+    box-shadow 200ms;
+
+  &:hover {
+    border-color: var(--card-accent);
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--card-accent) var(--card-glow), transparent);
+  }
+}
+
+:host(.overdue) .task-card {
+  padding-inline-start: 17px;
+  background: var(--app-danger-soft);
+  border-color: color-mix(in srgb, var(--app-danger) 30%, var(--app-border));
+  border-inline-start: 4px solid var(--app-danger);
+
+  &:hover {
+    border-color: var(--app-danger);
+  }
+}
+
+.task-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 29px;
+}
+
+.task-card__menu-btn {
+  width: 24px;
+  height: 29px;
+  margin-inline-end: -8px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--app-text-muted);
+  font-size: 18px;
+  line-height: 28.8px;
+
+  &:hover {
+    background: var(--app-hover);
+  }
+}
+
+.task-card__title {
+  margin: 7px 0 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 19.6px;
+  color: var(--app-text);
+}
+
+.task-card__description {
+  margin: 4px 0 0;
+  font-size: 12.1px;
+  line-height: 19.5px;
+  color: var(--app-text-muted);
+}
+
+.task-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 14px;
+}
+
+.task-card__due,
+.task-card__tags {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  line-height: 19.2px;
+  color: var(--app-text-muted);
+}
+
+.task-card__due {
+  font-size: 11px;
+}
+
+.task-card__tags {
+  padding-inline-start: 3px;
+  font-size: 12px;
+}
+
+.task-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  padding-top: 17px;
+  border-top: 1px solid var(--app-border);
+  font-size: 12px;
+  line-height: 19.2px;
+  color: var(--app-text);
+}
